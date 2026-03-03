@@ -31,23 +31,38 @@ export default function Page() {
   });
 
   const { types } = usePokemonTypes();
-
+  useComparisonStore((state) => state.comparisonTable); // this line is mandatory to track isIncluded
   const togglePokemon = useComparisonStore((state) => state.togglePokemon);
-  const isIncluded = useComparisonStore((state) => state.isIncluded);
+  const isPokemonIncluded = useComparisonStore((state) => state.isIncluded);
 
   const totalPages = Math.ceil(totalCount / LIMIT);
+
+  const handleSearchChange = (value: string) => {
+    setSearch(value);
+    setPage(1);
+  };
+
+  const handleTypeChange = (value: string) => {
+    setType(value);
+    setPage(1);
+  };
+
+  const handleSortChange = (value: string) => {
+    setSort(value);
+    setPage(1);
+  };
 
   if (loading) return <p className="p-6">Loading...</p>;
   if (error) return <p className="p-6">Error loading Pokémon</p>;
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-6 mb-8">
       <h1 className="text-3xl font-bold mb-6">Pokédex</h1>
 
       <div className="flex gap-4 flex-wrap">
-        <SearchBar search={search} setSearch={setSearch} />
-        <SelectFilter type={type} setType={setType} types={types} />
-        <SelectSort sort={sort} setSort={setSort} />
+        <SearchBar search={search} setSearch={handleSearchChange} />
+        <SelectFilter type={type} setType={handleTypeChange} types={types} />
+        <SelectSort sort={sort} setSort={handleSortChange} />
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
@@ -56,7 +71,7 @@ export default function Page() {
             key={pokemon.id}
             pokemon={pokemon}
             onCompare={togglePokemon}
-            isIncludedInComparisonTable={isIncluded}
+            isIncludedInComparisonTable={isPokemonIncluded}
           />
         ))}
       </div>
