@@ -8,3 +8,12 @@ export interface GetPokemonsResponse {
     };
   };
 }
+
+export interface GetPokemonTypesResponse {
+  typename: {
+    type: {
+      id: number;
+      name: string;
+    };
+  }[];
+}

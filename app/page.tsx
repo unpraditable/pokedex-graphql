@@ -2,6 +2,9 @@
 
 import { Pagination } from "@/components/Pagination";
 import PokemonCard from "@/components/PokemonCard";
+import SearchBar from "@/components/SearchBar";
+import SelectFilter from "@/components/SelectFilter";
+import SelectSort from "@/components/SelectSort";
 import { useDebounce } from "@/hooks/useDebounce";
 import { client } from "@/lib/apolloClient";
 import { GET_POKEMONS } from "@/lib/queries";
@@ -53,36 +56,11 @@ function Home() {
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Pokédex</h1>
-      <input
-        type="text"
-        placeholder="Search Pokémon..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="border p-2 rounded"
-      />
+      <SearchBar search={search} setSearch={setSearch} />
 
-      <select
-        value={type}
-        onChange={(e) => setType(e.target.value)}
-        className="border p-2 rounded"
-      >
-        <option value="">All Types</option>
-        <option value="fire">Fire</option>
-        <option value="water">Water</option>
-        <option value="grass">Grass</option>
-        <option value="electric">Electric</option>
-      </select>
+      <SelectFilter type={type} setType={setType} />
 
-      <select
-        value={sort}
-        onChange={(e) => setSort(e.target.value)}
-        className="border p-2 rounded"
-      >
-        <option value="id-asc">ID Asc</option>
-        <option value="id-desc">ID Desc</option>
-        <option value="name-asc">Name Asc</option>
-        <option value="name-desc">Name Desc</option>
-      </select>
+      <SelectSort sort={sort} setSort={setSort} />
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
         {pokemons.map((pokemon) => (

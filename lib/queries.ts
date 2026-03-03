@@ -42,3 +42,14 @@ export const GET_POKEMONS = gql`
     }
   }
 `;
+
+export const GET_POKEMON_TYPES = gql`
+  query GetPokemonTypes {
+    typename(distinct_on: type_id) {
+      type {
+        name
+        id
+      }
+    }
+  }
+`;
