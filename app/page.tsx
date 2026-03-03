@@ -1,5 +1,6 @@
 "use client";
 
+import FloatingComparisonBar from "@/components/FloatingComparisonBar";
 import { Pagination } from "@/components/Pagination";
 import PokemonCard from "@/components/PokemonCard";
 import SearchBar from "@/components/SearchBar";
@@ -81,6 +82,8 @@ function Home() {
         totalPages={totalPages}
         onPageChange={setPage}
       />
+
+      <FloatingComparisonBar />
     </div>
   );
 }
