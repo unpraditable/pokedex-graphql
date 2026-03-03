@@ -1,7 +1,12 @@
 import { gql } from "@apollo/client";
 
 export const GET_POKEMONS = gql`
-  query GetPokemons($limit: Int!, $offset: Int!, $search: String) {
+  query GetPokemons(
+    $limit: Int!
+    $offset: Int!
+    $orderBy: [pokemon_order_by!]
+    $search: String
+  ) {
     pokemon_aggregate(where: { name: { _regex: $search } }) {
       aggregate {
         count
@@ -11,6 +16,7 @@ export const GET_POKEMONS = gql`
       limit: $limit
       offset: $offset
       where: { name: { _regex: $search } }
+      order_by: $orderBy
     ) {
       id
       name
