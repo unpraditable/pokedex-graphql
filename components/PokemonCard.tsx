@@ -1,6 +1,5 @@
 import { Pokemon } from "@/types/pokemon";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
   return (
