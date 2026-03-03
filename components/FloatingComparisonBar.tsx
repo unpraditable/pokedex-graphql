@@ -81,10 +81,10 @@ export default function FloatingComparisonBar() {
                 </p>
 
                 <p className="text-sm text-gray-200">
-                  <strong>Weight:</strong> {pokemon.weight}
+                  <strong>Weight:</strong> {pokemon.weight} lbs
                 </p>
                 <p className="text-sm text-gray-200">
-                  <strong>Height:</strong> {pokemon.height}
+                  <strong>Height:</strong> {pokemon.height} ft
                 </p>
 
                 <div className="mt-2 text-sm text-gray-200">
