@@ -1,13 +1,16 @@
 import { gql } from "@apollo/client";
 
 export const GET_POKEMONS = gql`
-  query GetPokemons {
-    pokemon(limit: 20, offset: 0) {
+  query GetPokemons($limit: Int!, $offset: Int!) {
+    pokemon_aggregate {
+      aggregate {
+        count
+      }
+    }
+    pokemon(limit: $limit, offset: $offset) {
       id
       name
-      pokemontypes {
-        type_id
-      }
+
       weight
       height
       pokemonsprites {

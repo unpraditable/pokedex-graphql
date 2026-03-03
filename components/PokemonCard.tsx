@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
   return (
     <div
-      className={`green rounded-lg shadow-lg p-2 text-center flex justify-between bg-[url(/pokeball.svg)] bg-size-[auto_100px] md:bg-size-[auto_200px] bg-no-repeat bg-bottom-right min-h-[150px] md:min-h-[200px]`}
+      className={`bg-sky-700 rounded-lg shadow-lg p-2 text-center flex justify-between bg-[url(/pokeball.svg)] bg-size-[auto_100px] md:bg-size-[auto_200px] bg-no-repeat bg-bottom-right min-h-[150px] md:min-h-[200px]`}
     >
       <div className="">
         <div className="flex flex-col gap-3 mb-6">
