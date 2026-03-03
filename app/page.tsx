@@ -9,6 +9,7 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { client } from "@/lib/apolloClient";
 import { GET_POKEMONS } from "@/lib/queries";
 import { GetPokemonsResponse } from "@/types/graphql";
+import { Pokemon } from "@/types/pokemon";
 import { ApolloProvider, useQuery } from "@apollo/client/react";
 import { useState } from "react";
 
@@ -19,6 +20,7 @@ function Home() {
   const debouncedSearch = useDebounce(search, 500);
   const [sort, setSort] = useState("id-asc");
   const [type, setType] = useState("");
+  const [comparisonTable, setComparisonTable] = useState<Pokemon[]>([]);
 
   const buildOrderBy = () => {
     switch (sort) {
@@ -53,6 +55,21 @@ function Home() {
 
   console.log(pokemons, "pokemons");
 
+  const isIncludedInComparisonTable = (pokemon: Pokemon) => {
+    return !!comparisonTable.find((item) => pokemon.id === item.id);
+  };
+
+  const handleCompare = (pokemon: Pokemon) => {
+    if (isIncludedInComparisonTable(pokemon)) {
+      const newComparisonTable = comparisonTable.filter(
+        (item) => pokemon.id !== item.id,
+      );
+      setComparisonTable(newComparisonTable);
+    } else {
+      setComparisonTable([...comparisonTable, pokemon]);
+    }
+  };
+
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Pokédex</h1>
@@ -64,7 +81,12 @@ function Home() {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
         {pokemons.map((pokemon) => (
-          <PokemonCard key={pokemon.id} pokemon={pokemon} />
+          <PokemonCard
+            key={pokemon.id}
+            pokemon={pokemon}
+            onCompare={handleCompare}
+            isIncludedInComparisonTable={isIncludedInComparisonTable}
+          />
         ))}
       </div>
       <Pagination

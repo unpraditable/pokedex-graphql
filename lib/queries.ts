@@ -36,6 +36,12 @@ export const GET_POKEMONS = gql`
           name
         }
       }
+      pokemonstats {
+        base_stat
+        stat {
+          name
+        }
+      }
       pokemonsprites {
         sprites(path: "front_default")
       }
