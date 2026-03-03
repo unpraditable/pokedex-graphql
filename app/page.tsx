@@ -15,6 +15,7 @@ function Home() {
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 500);
   const [sort, setSort] = useState("id-asc");
+  const [type, setType] = useState("");
 
   const buildOrderBy = () => {
     switch (sort) {
@@ -31,7 +32,8 @@ function Home() {
 
   const { data, loading, error } = useQuery<GetPokemonsResponse>(GET_POKEMONS, {
     variables: {
-      search: `${debouncedSearch}`,
+      search: debouncedSearch,
+      type: type,
       limit: LIMIT,
       orderBy: buildOrderBy(),
       offset: (page - 1) * LIMIT,
@@ -46,6 +48,8 @@ function Home() {
 
   const totalPages = Math.ceil(totalCount / LIMIT);
 
+  console.log(pokemons, "pokemons");
+
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Pokédex</h1>
@@ -56,6 +60,18 @@ function Home() {
         onChange={(e) => setSearch(e.target.value)}
         className="border p-2 rounded"
       />
+
+      <select
+        value={type}
+        onChange={(e) => setType(e.target.value)}
+        className="border p-2 rounded"
+      >
+        <option value="">All Types</option>
+        <option value="fire">Fire</option>
+        <option value="water">Water</option>
+        <option value="grass">Grass</option>
+        <option value="electric">Electric</option>
+      </select>
 
       <select
         value={sort}
