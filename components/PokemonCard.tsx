@@ -3,7 +3,7 @@ import Image from "next/image";
 interface Props {
   pokemon: Pokemon;
   onCompare: (pokemon: Pokemon, isActionRemove: boolean) => void;
-  isIncludedInComparisonTable: (pokemon: Pokemon) => boolean;
+  isIncludedInComparisonTable: (pokemonId: number) => boolean;
 }
 export default function PokemonCard({
   pokemon,
@@ -35,7 +35,7 @@ export default function PokemonCard({
         </div>
       </div>
 
-      {!isIncludedInComparisonTable(pokemon) ? (
+      {!isIncludedInComparisonTable(pokemon.id) ? (
         <button
           onClick={() => onCompare(pokemon, false)}
           className="my-4 bg-green-500 text-white px-3 py-1 rounded"

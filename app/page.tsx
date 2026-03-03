@@ -8,8 +8,8 @@ import SelectSort from "@/components/SelectSort";
 import { useDebounce } from "@/hooks/useDebounce";
 import { client } from "@/lib/apolloClient";
 import { GET_POKEMONS } from "@/lib/queries";
+import { useComparisonStore } from "@/store/useComparisonStore";
 import { GetPokemonsResponse } from "@/types/graphql";
-import { Pokemon } from "@/types/pokemon";
 import { ApolloProvider, useQuery } from "@apollo/client/react";
 import { useState } from "react";
 
@@ -20,8 +20,12 @@ function Home() {
   const debouncedSearch = useDebounce(search, 500);
   const [sort, setSort] = useState("id-asc");
   const [type, setType] = useState("");
-  const [comparisonTable, setComparisonTable] = useState<Pokemon[]>([]);
+  const comparisonTable = useComparisonStore((state) => state.comparisonTable);
 
+  const togglePokemon = useComparisonStore((state) => state.togglePokemon);
+  const isIncluded = useComparisonStore((state) => state.isIncluded);
+
+  console.log(comparisonTable, "comparisonTable");
   const buildOrderBy = () => {
     switch (sort) {
       case "id-desc":
@@ -53,23 +57,6 @@ function Home() {
 
   const totalPages = Math.ceil(totalCount / LIMIT);
 
-  console.log(pokemons, "pokemons");
-
-  const isIncludedInComparisonTable = (pokemon: Pokemon) => {
-    return !!comparisonTable.find((item) => pokemon.id === item.id);
-  };
-
-  const handleCompare = (pokemon: Pokemon) => {
-    if (isIncludedInComparisonTable(pokemon)) {
-      const newComparisonTable = comparisonTable.filter(
-        (item) => pokemon.id !== item.id,
-      );
-      setComparisonTable(newComparisonTable);
-    } else {
-      setComparisonTable([...comparisonTable, pokemon]);
-    }
-  };
-
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Pokédex</h1>
@@ -84,8 +71,8 @@ function Home() {
           <PokemonCard
             key={pokemon.id}
             pokemon={pokemon}
-            onCompare={handleCompare}
-            isIncludedInComparisonTable={isIncludedInComparisonTable}
+            onCompare={togglePokemon}
+            isIncludedInComparisonTable={isIncluded}
           />
         ))}
       </div>
