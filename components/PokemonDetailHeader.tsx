@@ -26,7 +26,7 @@ export default function PokemonDetailHeader({ pokemon }: Props) {
         <div className="flex gap-2 mt-3">
           {pokemon.pokemontypes.map((type) => (
             <span
-              key={type.type_id}
+              key={type.type.name}
               className="bg-white/20 px-3 py-1 rounded-full text-sm"
             >
               {type.type.name}
