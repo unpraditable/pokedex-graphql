@@ -13,6 +13,10 @@ export default function FloatingComparisonBar() {
 
   if (comparisonTable.length === 0) return null;
 
+  const formatName = (name: string) => {
+    return name.replace("-", " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  };
+
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50">
       <div className="flex justify-center">
@@ -28,7 +32,7 @@ export default function FloatingComparisonBar() {
 
       <div
         className={`bg-gray-900 shadow-2xl border-t overflow-x-auto transition-all duration-300 ${
-          isOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
+          isOpen ? "max-h-100 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="p-4">
@@ -49,7 +53,7 @@ export default function FloatingComparisonBar() {
             {comparisonTable.map((pokemon) => (
               <div
                 key={pokemon.id}
-                className="min-w-[220px] bg-gray-700 rounded-lg p-3"
+                className="min-w-55 bg-gray-700 rounded-lg p-3"
               >
                 <div className="flex justify-between items-center">
                   <h3 className="font-semibold capitalize text-white">
@@ -104,8 +108,4 @@ export default function FloatingComparisonBar() {
       </div>
     </div>
   );
-}
-
-function formatName(name: string) {
-  return name.replace("-", " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }

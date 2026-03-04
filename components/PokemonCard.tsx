@@ -1,5 +1,6 @@
 import { Pokemon } from "@/types/pokemon";
 import Image from "next/image";
+import Link from "next/link";
 interface Props {
   pokemon: Pokemon;
   onCompare: (pokemon: Pokemon, isActionRemove: boolean) => void;
@@ -16,9 +17,12 @@ export default function PokemonCard({
     >
       <div className="flex justify-between">
         <div className="flex flex-col gap-3 mb-6">
-          <h2 className="text-sm sm:text-lg md:text-2xl font-semibold text-white capitalize">
+          <Link
+            href={`/pokemon/${pokemon.id}`}
+            className="text-sm sm:text-lg md:text-2xl font-semibold text-white capitalize cursor-pointer hover:underline"
+          >
             {pokemon.name}
-          </h2>
+          </Link>
         </div>
         <div className="flex flex-col justify-between text-right">
           <span className="text-white text-sm sm:text-lg md:text-2xl font-bold">

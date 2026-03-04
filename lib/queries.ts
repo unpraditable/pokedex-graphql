@@ -59,3 +59,28 @@ export const GET_POKEMON_TYPES = gql`
     }
   }
 `;
+
+export const GET_POKEMON_DETAIL = gql`
+  query GetPokemonDetail($id: Int!) {
+    pokemon(where: { id: { _eq: $id } }) {
+      id
+      name
+      weight
+      height
+      pokemontypes {
+        type {
+          name
+        }
+      }
+      pokemonstats {
+        base_stat
+        stat {
+          name
+        }
+      }
+      pokemonsprites {
+        sprites(path: "front_default")
+      }
+    }
+  }
+`;
