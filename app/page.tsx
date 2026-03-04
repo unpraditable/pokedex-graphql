@@ -19,6 +19,7 @@ export default function Page() {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("id-asc");
   const [type, setType] = useState("");
+  const [isTableOpen, setIsTableOpen] = useState(false);
 
   const debouncedSearch = useDebounce(search, 500);
 
@@ -72,6 +73,7 @@ export default function Page() {
             pokemon={pokemon}
             onCompare={togglePokemon}
             isIncludedInComparisonTable={isPokemonIncluded}
+            setIsTableOpen={setIsTableOpen}
           />
         ))}
       </div>
@@ -82,7 +84,7 @@ export default function Page() {
         onPageChange={setPage}
       />
 
-      <FloatingComparisonBar />
+      <FloatingComparisonBar isOpen={isTableOpen} setIsOpen={setIsTableOpen} />
     </div>
   );
 }

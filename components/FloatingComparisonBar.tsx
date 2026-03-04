@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { useComparisonStore } from "@/store/useComparisonStore";
 
-export default function FloatingComparisonBar() {
-  const [isOpen, setIsOpen] = useState(true);
-
+interface Props {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}
+export default function FloatingComparisonBar({ isOpen, setIsOpen }: Props) {
   const comparisonTable = useComparisonStore((state) => state.comparisonTable);
   const removePokemon = useComparisonStore((state) => state.removePokemon);
   const clearAll = useComparisonStore((state) => state.clearAll);

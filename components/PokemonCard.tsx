@@ -5,11 +5,13 @@ interface Props {
   pokemon: Pokemon;
   onCompare: (pokemon: Pokemon, isActionRemove: boolean) => void;
   isIncludedInComparisonTable: (pokemonId: number) => boolean;
+  setIsTableOpen: (isOpen: boolean) => void;
 }
 export default function PokemonCard({
   pokemon,
   onCompare,
   isIncludedInComparisonTable,
+  setIsTableOpen,
 }: Props) {
   return (
     <div
@@ -41,14 +43,20 @@ export default function PokemonCard({
 
       {!isIncludedInComparisonTable(pokemon.id) ? (
         <button
-          onClick={() => onCompare(pokemon, false)}
+          onClick={() => {
+            onCompare(pokemon, false);
+            setIsTableOpen(true);
+          }}
           className="my-4 bg-green-500 text-white px-3 py-1 rounded"
         >
           Compare
         </button>
       ) : (
         <button
-          onClick={() => onCompare(pokemon, true)}
+          onClick={() => {
+            onCompare(pokemon, false);
+            setIsTableOpen(true);
+          }}
           className="my-4 bg-red-500 text-white px-3 py-1 rounded"
         >
           Remove
