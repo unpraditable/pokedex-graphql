@@ -1,3 +1,4 @@
+"use client";
 interface Props {
   search: string;
   setSearch: (searchTerm: string) => void;

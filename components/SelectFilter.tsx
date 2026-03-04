@@ -1,3 +1,4 @@
+"use client";
 interface Props {
   type: string;
   setType: (type: string) => void;

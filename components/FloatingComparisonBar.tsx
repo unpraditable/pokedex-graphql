@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import { useComparisonStore } from "@/store/useComparisonStore";
 import Link from "next/link";

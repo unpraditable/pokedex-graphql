@@ -1,3 +1,4 @@
+"use client";
 interface Props {
   sort: string;
   setSort: (sortTerm: string) => void;

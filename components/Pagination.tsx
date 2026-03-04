@@ -1,3 +1,4 @@
+"use client";
 interface Props {
   currentPage: number;
   totalPages: number;

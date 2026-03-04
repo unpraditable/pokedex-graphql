@@ -1,3 +1,5 @@
+"use client";
+
 import { Pokemon } from "@/types/pokemon";
 import PokemonStatBar from "./PokemonStatBar";
 
