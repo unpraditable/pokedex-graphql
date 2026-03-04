@@ -26,7 +26,7 @@ export default function Page() {
   const { pokemons, totalCount, loading, error } = usePokemons({
     page,
     limit: LIMIT,
-    search: debouncedSearch,
+    search: debouncedSearch.toLowerCase(),
     type,
     sort,
   });
