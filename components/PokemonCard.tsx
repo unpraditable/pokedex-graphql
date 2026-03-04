@@ -49,7 +49,7 @@ export default function PokemonCard({
             onCompare(pokemon, false);
             setIsTableOpen(true);
           }}
-          className="my-4 bg-green-500 text-white px-3 py-1 rounded"
+          className="my-4 bg-green-500 text-white px-3 py-1 rounded cursor-pointer"
         >
           Compare
         </button>
@@ -59,7 +59,7 @@ export default function PokemonCard({
             onCompare(pokemon, false);
             setIsTableOpen(true);
           }}
-          className="my-4 bg-red-500 text-white px-3 py-1 rounded"
+          className="my-4 bg-red-500 text-white px-3 py-1 rounded cursor-pointer"
         >
           Remove
         </button>

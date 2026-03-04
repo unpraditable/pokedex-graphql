@@ -9,7 +9,7 @@ export default function SelectSort({ sort, setSort }: Props) {
     <select
       value={sort}
       onChange={(e) => setSort(e.target.value)}
-      className="border p-2 rounded"
+      className="border p-2 rounded cursor-pointer"
     >
       <option value="id-asc">ID Asc</option>
       <option value="id-desc">ID Desc</option>

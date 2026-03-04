@@ -15,7 +15,7 @@ export default function SelectFilter({ type, setType, types }: Props) {
     <select
       value={type}
       onChange={(e) => setType(e.target.value)}
-      className="border p-2 rounded"
+      className="border p-2 rounded cursor-pointer"
     >
       <option value="">All Types</option>
       {types.map((typename) => (
