@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useComparisonStore } from "@/store/useComparisonStore";
+import Link from "next/link";
 
 interface Props {
   isOpen: boolean;
@@ -23,7 +24,7 @@ export default function FloatingComparisonBar({ isOpen, setIsOpen }: Props) {
       <div className="flex justify-center">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="bg-green-800 font-bold text-white px-4 py-1 rounded-t-lg shadow-md text-md"
+          className="bg-green-800 font-bold text-white px-4 py-1 rounded-t-lg shadow-md text-md cursor-pointer"
         >
           {isOpen
             ? "Hide Comparison ↓"
@@ -44,7 +45,7 @@ export default function FloatingComparisonBar({ isOpen, setIsOpen }: Props) {
 
             <button
               onClick={clearAll}
-              className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition"
+              className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition cursor-pointer"
             >
               Clear All
             </button>
@@ -57,9 +58,13 @@ export default function FloatingComparisonBar({ isOpen, setIsOpen }: Props) {
                 className="min-w-55 bg-gray-700 rounded-lg p-3"
               >
                 <div className="flex justify-between items-center">
-                  <h3 className="font-semibold capitalize text-white">
+                  <Link
+                    href={`/pokemon/${pokemon.id}`}
+                    className="font-semibold capitalize text-white"
+                  >
                     {pokemon.name}
-                  </h3>
+                  </Link>
+
                   <button
                     onClick={() => removePokemon(pokemon.id)}
                     className="text-red-400 text-sm hover:text-red-500"
