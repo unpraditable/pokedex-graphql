@@ -9,7 +9,6 @@ import SelectSort from "@/components/SelectSort";
 import { useDebounce } from "@/hooks/useDebounce";
 import { usePokemons } from "@/hooks/usePokemons";
 import { usePokemonTypes } from "@/hooks/usePokemonTypes";
-import { useComparisonStore } from "@/store/useComparisonStore";
 import { useState } from "react";
 
 export default function Page() {
@@ -32,10 +31,6 @@ export default function Page() {
   });
 
   const { types } = usePokemonTypes();
-  useComparisonStore((state) => state.comparisonTable); // this line is mandatory to track isIncluded
-  const togglePokemon = useComparisonStore((state) => state.togglePokemon);
-  const isPokemonIncluded = useComparisonStore((state) => state.isIncluded);
-
   const totalPages = Math.ceil(totalCount / LIMIT);
 
   const handleSearchChange = (value: string) => {
@@ -71,8 +66,6 @@ export default function Page() {
           <PokemonCard
             key={pokemon.id}
             pokemon={pokemon}
-            onCompare={togglePokemon}
-            isIncludedInComparisonTable={isPokemonIncluded}
             setIsTableOpen={setIsTableOpen}
           />
         ))}
