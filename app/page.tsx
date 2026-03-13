@@ -48,7 +48,6 @@ export default function Page() {
     setPage(1);
   };
 
-  if (loading) return <p className="p-6">Loading...</p>;
   if (error) return <p className="p-6">Error loading Pokémon</p>;
 
   return (
@@ -61,21 +60,26 @@ export default function Page() {
         <SelectSort sort={sort} setSort={handleSortChange} />
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-        {pokemons.map((pokemon) => (
-          <PokemonCard
-            key={pokemon.id}
-            pokemon={pokemon}
-            setIsTableOpen={setIsTableOpen}
+      {loading ? (
+        <p className="p-6">Loading...</p>
+      ) : (
+        <div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+            {pokemons.map((pokemon) => (
+              <PokemonCard
+                key={pokemon.id}
+                pokemon={pokemon}
+                setIsTableOpen={setIsTableOpen}
+              />
+            ))}
+          </div>
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            onPageChange={setPage}
           />
-        ))}
-      </div>
-
-      <Pagination
-        currentPage={page}
-        totalPages={totalPages}
-        onPageChange={setPage}
-      />
+        </div>
+      )}
 
       <FloatingComparisonBar isOpen={isTableOpen} setIsOpen={setIsTableOpen} />
     </div>
